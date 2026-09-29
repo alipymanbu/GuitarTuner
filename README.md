@@ -1,56 +1,26 @@
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/TomSchimansky/GuitarTuner)
-![GitHub all releases](https://img.shields.io/github/downloads/TomSchimansky/GuitarTuner/total?color=green&label=macOS%20release%20downloads)
-![GitHub Release Date](https://img.shields.io/github/release-date/TomSchimansky/GuitarTuner?color=green)
+# guitartuner
 
-# GuitarTuner App
+本仓库是「guitartuner」的安卓版本获取入口，附使用资料索引。
 
-![](documentation/readme_images/Preview_Dark.png)
+## 安装文件资源（夸克网盘）
 
-This is a simple **chromatic tuner** designed for guitar tuning, but it should also work with every other instrument.
-The played note is automatically recognized through the microphone, and an acoustic signal is
-heard when the tuning is correct. If you want you can also change the reference-tone to another
-frequency. At the moment, a compiled version is only available for macOS, but you can use it on
-Windows too if you run it in the command line.
+> **guitartuner 安装文件资源（夸克网盘）**：[https://pan.quark.cn/s/424154c74c0a](https://pan.quark.cn/s/424154c74c0a)
 
-* Automatic tone detection
-* High accuracy: < 0.5 cents (around the A4 area)
-* Working from 60 to 2000 Hz (C2 to C7)
-* High stability of the pitch indicator
-* Support for macOS light and dark-mode
+## 官方项目
 
-### **➜️ Download macOS app (Intel only):** [<u>Download here</u>](https://github.com/TomSchimansky/GuitarTuner/releases/tag/3.2)
+- 上游项目：[TomSchimansky/GuitarTuner](https://github.com/TomSchimansky/GuitarTuner)
 
-![](documentation/readme_images/Icon_Banner.png)
+## 更多资料
 
-### Functionality
+- [下载与安装教程](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/guitartuner/%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.md)
+- [免费功能与订阅区别](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/guitartuner/%E5%85%8D%E8%B4%B9%E5%8A%9F%E8%83%BD%E4%B8%8E%E8%AE%A2%E9%98%85%E5%8C%BA%E5%88%AB.md)
+- [支持乐器与标准音对照](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/guitartuner/%E6%94%AF%E6%8C%81%E4%B9%90%E5%99%A8%E4%B8%8E%E6%A0%87%E5%87%86%E9%9F%B3%E5%AF%B9%E7%85%A7.md)
+- [歌曲库与网页版](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/guitartuner/%E6%AD%8C%E6%9B%B2%E5%BA%93%E4%B8%8E%E7%BD%91%E9%A1%B5%E7%89%88.md)
+- [节拍器与和弦库怎么用](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/guitartuner/%E8%8A%82%E6%8B%8D%E5%99%A8%E4%B8%8E%E5%92%8C%E5%BC%A6%E5%BA%93%E6%80%8E%E4%B9%88%E7%94%A8.md)
+- [调音不准常见问题排查](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/guitartuner/%E8%B0%83%E9%9F%B3%E4%B8%8D%E5%87%86%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5.md)
+- [调音模式与调弦选择](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/guitartuner/%E8%B0%83%E9%9F%B3%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%B0%83%E5%BC%A6%E9%80%89%E6%8B%A9.md)
+- [全部软件目录](https://github.com/alipymanbu/Android/blob/master/%E5%85%A8%E9%83%A8%E8%BD%AF%E4%BB%B6%E7%9B%AE%E5%BD%95.md)
 
-The app is written in Python with Tkinter, PyAudio and numpy. It uses PyAudio to get access to the raw audio-stream coming from the microphone.
-Then a **fast-fourier-transformation** (```numpy.fft```) is applied on the audio-data, which is buffered for about 1.5 seconds.
-Then a HPS (Harmonic Product Spectrum) operation is applied to filter the harmonic frequencies.
-From the HPS output, you can get the loudest frequency and convert it to a musical note by applying the following
-formula: ```12 * numpy.log2(f / a4_frequency) + 69```.
+---
 
-### Run GuitarTuner with python
-First you need to install all necessary libraries:
-```
-pip3 install -r requirements.txt
-```
-Then you can do:
-```
-python3 main.py
-```
-
-### Create standalone application
-You can also create a standalone application for macOS or Windows by yourself. For macOS you can use py2app:
-```
-python3.8 setup.py py2app
-```
-For windows, you would need to use py2exe instead and modify the setup.py file.
-
-To keep application size as small as possible, make sure you create a virtual environment where you install
-only the necessary libraries. The macOS dark-mode currently **only** works with the **anaconda python** Version.
-If you compile the app with a python.org version, you have to disable the dark-mode by deleting
-the ```'NSRequiresAquaSystemAppearance': False```entry in setup.py, which causes the application window to go
-into dark-mode.
-
-![](documentation/readme_images/Preview_Light.png)
+> 本仓库由上游项目 fork 而来，原始说明见[上游仓库](https://github.com/TomSchimansky/GuitarTuner)。
